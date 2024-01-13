@@ -24,15 +24,21 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    public String getName() {
-        return name;
+    @Column(nullable = false)
+    private String email;
+
+    // getters and setters...
+
+    // Corrected getters and setters for email
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-
+    // Other getters and setters...
 
     public long getId() {
         return id;
@@ -64,5 +70,13 @@ public class User {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

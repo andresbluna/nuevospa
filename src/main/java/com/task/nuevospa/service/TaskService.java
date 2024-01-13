@@ -2,8 +2,12 @@ package com.task.nuevospa.service;
 
 import com.task.nuevospa.model.Task;
 import com.task.nuevospa.repository.TaskRepository;
+import com.task.nuevospa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -24,14 +28,17 @@ public class TaskService {
     }
 
     // Update
-    public Task updateTask(Long id, Task updatedTask) {
-        Task existingTask = taskRepository.findById(id).orElse(null);
-        if (existingTask != null) {
-            existingTask.setNombre(updatedTask.getNombre());
-            existingTask.setDescription(updatedTask.getDescription());
-            return taskRepository.save(existingTask);
+    public Task updateTaskName(Long id, Task updatedTask) {
+        Optional<Task> optionalTask = this.taskRepository.findById(id);
+
+        if (optionalTask.isPresent()) {
+            Task existingTask = optionalTask.get();
+            existingTask.setName(updatedTask.getName());
+            this.taskRepository.save(existingTask);
+            return existingTask;
+        } else {
+            throw new UserRepository.ResourceNotFoundException("Task", "id", id);
         }
-        return null;
     }
 
     // Delete
@@ -39,4 +46,23 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
+    }
+
+    public Task updateTask(Long id, Task updatedTask) {
+        Optional<Task> optionalTask = this.taskRepository.findById(id);
+
+        if (optionalTask.isPresent()) {
+            Task existingTask = optionalTask.get();
+
+            existingTask.setName(updatedTask.getName());
+            existingTask.setDescription(updatedTask.getDescription());
+
+            return this.taskRepository.save(existingTask);
+        } else {
+            throw new RuntimeException("Task not found with id: " + id);
+        }
+
+    }
 }

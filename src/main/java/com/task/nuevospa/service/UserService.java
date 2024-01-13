@@ -32,7 +32,8 @@ public class UserService {
     }
 
     public User updateUser(Long id, User updatedUser) {
-        User existingUser = userRepository.findById(id).orElseThrow(() -> new UserRepository.ResourceNotFoundException("User not found with id " + id));
+        User existingUser = userRepository.findById(id).orElseThrow(()
+                -> new UserRepository.ResourceNotFoundException("User not found with id " + id));
         existingUser.setName(updatedUser.getName());
         existingUser.setEmail(updatedUser.getEmail());
         userRepository.save(existingUser);

@@ -26,5 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             super(message);
         }
 
+        public ResourceNotFoundException(String task, String id, Long id1) {
+        }
     }
 }
