@@ -27,9 +27,6 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    // getters and setters...
-
-    // Corrected getters and setters for email
     public String getEmail() {
         return email;
     }
@@ -37,8 +34,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    // Other getters and setters...
 
     public long getId() {
         return id;

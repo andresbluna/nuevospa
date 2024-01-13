@@ -22,12 +22,10 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    // Read
     public Task getTask(Long id) {
         return taskRepository.findById(id).orElse(null);
     }
 
-    // Update
     public Task updateTaskName(Long id, Task updatedTask) {
         Optional<Task> optionalTask = this.taskRepository.findById(id);
 
@@ -41,7 +39,6 @@ public class TaskService {
         }
     }
 
-    // Delete
     public void deleteTask(Long id) {
         taskRepository.deleteById(id);
     }

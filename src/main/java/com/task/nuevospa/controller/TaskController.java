@@ -24,7 +24,6 @@ public class TaskController {
         return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
     }
 
-    // GET /tasks/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTask(@PathVariable Long id) {
         Task task = taskService.getTask(id);
