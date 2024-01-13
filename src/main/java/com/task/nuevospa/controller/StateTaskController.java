@@ -19,35 +19,12 @@ public class StateTaskController {
 
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
-        Task savedTask = taskService.createTask(task);
+        @PostMapping
+        public ResponseEntity<Task> createTask (@RequestBody Task task){
+            Task savedTask = taskService.createTask(task);
+            return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
+        }
         return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
-    }
-
-    // GET /tasks/{id}
-    @GetMapping("/{id}")
-    public ResponseEntity<Task> getTask(@PathVariable Long id) {
-        Task task = taskService.getTask(id);
-        if (task == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(task, HttpStatus.OK);
-    }
-
-    // PUT /tasks/{id}
-    @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
-        Task task = taskService.updateTask(id, updatedTask);
-        if (task == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(task, HttpStatus.OK);
-    }
-
-    // DELETE /tasks/{id}
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-        taskService.deleteTask(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
